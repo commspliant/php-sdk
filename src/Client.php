@@ -39,9 +39,6 @@ final class Client
             'templateId' => $request->templateId,
             'variables' => $request->variables,
         ];
-        if ($request->templateVersionId !== null && $request->templateVersionId !== '') {
-            $payload['templateVersionId'] = $request->templateVersionId;
-        }
 
         $url = rtrim($this->baseUrl, '/') . $path;
         $body = json_encode($payload, JSON_THROW_ON_ERROR);
