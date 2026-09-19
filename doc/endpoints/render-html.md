@@ -46,10 +46,9 @@ Resolves an **approved** template version and returns rendered HTML as a streame
 ```php
 <?php
 
-use CommsPliant\Client; // TODO: replace with real SDK import once published
+use CommsPliant\Client;
 use CommsPliant\RenderRequest;
 
-// TODO: replace with real SDK call once published
 $client = new Client('ck_YOUR_API_KEY');
 
 $request = new RenderRequest(
@@ -61,5 +60,5 @@ $request = new RenderRequest(
 );
 
 $result = $client->renderHtml($request);
-file_put_contents('document.html', $result->getBody());
+file_put_contents('document.html', $result->body);
 ```

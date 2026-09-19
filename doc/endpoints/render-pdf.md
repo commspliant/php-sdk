@@ -44,10 +44,9 @@ Same auth rules as `POST /api/v1/render/html`.
 ```php
 <?php
 
-use CommsPliant\Client; // TODO: replace with real SDK import once published
+use CommsPliant\Client;
 use CommsPliant\RenderRequest;
 
-// TODO: replace with real SDK call once published
 $client = new Client('ck_YOUR_API_KEY');
 
 $request = new RenderRequest(
@@ -59,5 +58,5 @@ $request = new RenderRequest(
 );
 
 $result = $client->renderPdf($request);
-file_put_contents('document.pdf', $result->getBody());
+file_put_contents('document.pdf', $result->body);
 ```
