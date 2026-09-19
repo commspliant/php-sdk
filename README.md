@@ -7,10 +7,10 @@ Requires PHP 8.1 or later with the `curl` and `json` extensions.
 ## Installation
 
 ```bash
-composer install
+composer require commspliant/sdk
 ```
 
-Or clone this repository and add it to your project's `composer.json`.
+To work on the SDK itself, clone this repository and run `composer install`.
 
 ## Quickstart
 

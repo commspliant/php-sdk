@@ -3,6 +3,18 @@
   "description": "Official CommsPliant Customer Integration API SDK for PHP",
   "type": "library",
   "license": "MIT",
+  "homepage": "https://developer.commspliant.com/",
+  "keywords": ["commspliant", "api", "sdk", "templates", "rendering"],
+  "authors": [
+    {
+      "name": "CommsPliant",
+      "homepage": "https://commspliant.com/"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/commspliant/php-sdk/issues",
+    "source": "https://github.com/commspliant/php-sdk"
+  },
   "require": {
     "php": "^8.1",
     "ext-curl": "*",
