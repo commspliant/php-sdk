@@ -31,6 +31,34 @@ final class Client
         return $this->postRender('/api/v1/render/pdf', $request);
     }
 
+    /** @param array<string, mixed> $payload */
+    public function submitRenderBatch(array $payload): array
+    {
+        $url = rtrim($this->baseUrl, '/') . '/api/v1/render/batches';
+        $body = json_encode($payload, JSON_THROW_ON_ERROR);
+        $headers = ['Content-Type: application/json'];
+        if ($this->useBearerAuth) {
+            $headers[] = 'Authorization: Bearer ' . $this->apiKey;
+        } else {
+            $headers[] = 'X-Api-Key: ' . $this->apiKey;
+        }
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_POST => true,
+            CURLOPT_HTTPHEADER => $headers,
+            CURLOPT_POSTFIELDS => $body,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => $this->timeoutSeconds,
+        ]);
+        $responseBody = curl_exec($ch);
+        $statusCode = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
+        curl_close($ch);
+        if ($statusCode !== 202) {
+            throw $this->parseAPIError($statusCode, (string) $responseBody, '');
+        }
+        return json_decode((string) $responseBody, true, 512, JSON_THROW_ON_ERROR);
+    }
+
     private function postRender(string $path, RenderRequest $request): RenderResult
     {
         $this->validateRenderRequest($request);
