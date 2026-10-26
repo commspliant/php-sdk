@@ -32,9 +32,21 @@ final class Client
     }
 
     /** @param array<string, mixed> $payload */
-    public function submitRenderBatch(array $payload): array
+    public function submitRenderBatchHtml(array $payload): array
     {
-        $url = rtrim($this->baseUrl, '/') . '/api/v1/render/batches';
+        return $this->submitRenderBatch('/api/v1/render/batches/html', $payload);
+    }
+
+    /** @param array<string, mixed> $payload */
+    public function submitRenderBatchPdf(array $payload): array
+    {
+        return $this->submitRenderBatch('/api/v1/render/batches/pdf', $payload);
+    }
+
+    /** @param array<string, mixed> $payload */
+    private function submitRenderBatch(string $path, array $payload): array
+    {
+        $url = rtrim($this->baseUrl, '/') . $path;
         $body = json_encode($payload, JSON_THROW_ON_ERROR);
         $headers = ['Content-Type: application/json'];
         if ($this->useBearerAuth) {
